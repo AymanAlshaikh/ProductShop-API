@@ -1,22 +1,26 @@
 const Productz = (sequelize, DataTypes) => {
-  const Product = sequelize.define("Product", {
-    image: {
-      type: DataTypes.STRING,
-      validate: {
-        isUrl: true,
+  const Product = sequelize.define(
+    "Product",
+    {
+      image: {
+        type: DataTypes.STRING,
+        validate: {
+          isUrl: true,
+        },
       },
-    },
-    name: { type: DataTypes.STRING, allowNull: false },
-    price: {
-      type: DataTypes.FLOAT,
-      defaultValue: 0,
-      validate: {
-        min: 1,
-        max: 100,
+      name: { type: DataTypes.STRING, allowNull: false },
+      price: {
+        type: DataTypes.FLOAT,
+        defaultValue: 0,
+        validate: {
+          min: 1,
+          max: 100,
+        },
       },
+      description: { type: DataTypes.STRING },
     },
-    description: { type: DataTypes.STRING },
-  });
+    { timestamps: false }
+  );
   return Product;
 };
 module.exports = Productz;
