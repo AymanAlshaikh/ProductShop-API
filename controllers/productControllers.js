@@ -37,7 +37,7 @@ exports.removeProduct = async (req, res, next) => {
   }
 };
 
-exports.newProduct = async (req, res) => {
+exports.newProduct = async (req, res, next) => {
   try {
     const newProducts = await Product.create(req.body);
     res.json(newProducts);
@@ -49,18 +49,14 @@ exports.newProduct = async (req, res) => {
   }
 };
 
-exports.updateProduct = async (req, res) => {
+exports.updateProduct = async (req, res, next) => {
   const { dataId } = req.params;
   try {
     //found = await Product.findByPk(dataId);
-    if (found) {
-      found.update(req.body);
-      res.status(204);
-      res.end();
-    } else {
-      res.status(404);
-      res.json("no products to update");
-    }
+
+    req.whatever.update(req.body);
+    res.status(204);
+    res.end();
   } catch (error) {
     //res.status(500);
     //res.json({ message: error.message });

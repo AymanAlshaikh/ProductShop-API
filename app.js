@@ -8,12 +8,11 @@ app.use(express.json());
 app.use("/data", routes);
 
 app.use((req, res, next) => {
-  const error = { message: "path not found", status: 404 };
-  next(error);
+  next({ status: 404, message: "path not found" });
 });
 
 app.use((err, req, res, next) => {
-  res.status(err || 500);
+  res.status(err.status || 500);
   res.json({ error: { message: "internal server error" || error.message } });
 });
 

@@ -9,8 +9,8 @@ const {
   fetchProduct,
 } = require("../controllers/productControllers");
 
-router.param("dataId", (req, res, next, dataId) => {
-  const product = fetchProduct(dataId, next);
+router.param("dataId", async (req, res, next, dataId) => {
+  const product = await fetchProduct(dataId, next);
   if (product) {
     req.whatever = product;
     next();
