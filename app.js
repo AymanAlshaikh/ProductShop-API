@@ -1,10 +1,11 @@
 const express = require("express");
-
+const cors = require("cors");
 const db = require("./db/models");
 
 const app = express();
 const routes = require("./routes/products");
 app.use(express.json());
+app.use(cors());
 app.use("/data", routes);
 
 app.use((req, res, next) => {
@@ -15,8 +16,6 @@ app.use((err, req, res, next) => {
   res.status(err.status || 500);
   res.json({ error: { message: "internal server error" || error.message } });
 });
-
-//db.authenticate();
 
 const run = async () => {
   try {
@@ -32,7 +31,3 @@ const run = async () => {
 };
 
 run();
-
-/*app.listen(8000, () => {
-  console.log("running");
-});*/
