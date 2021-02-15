@@ -1,12 +1,15 @@
 const express = require("express");
 const cors = require("cors");
 const db = require("./db/models");
-
+const path = require("path");
+const dirPath = path.join(__dirname, "media");
 const app = express();
 const routes = require("./routes/products");
+
 app.use(express.json());
 app.use(cors());
 app.use("/data", routes);
+app.use("/media", express.static(dirPath));
 
 app.use((req, res, next) => {
   next({ status: 404, message: "path not found" });

@@ -31,21 +31,26 @@ exports.removeProduct = async (req, res, next) => {
 };
 
 exports.newProduct = async (req, res, next) => {
+  console.log(req.body);
   try {
+    if (req.file) {
+      req.body.image = `http://${req.get("host")}/media/${req.file.filename}`;
+    }
     const newProducts = await Product.create(req.body);
-    res.json(newProducts);
     res.status(201);
+    res.json(newProducts);
   } catch (error) {
     next(error);
   }
 };
 
 exports.updateProduct = async (req, res, next) => {
-  const { dataId } = req.params;
   try {
-    req.whatever.update(req.body);
-    res.status(204);
-    res.end();
+    if (req.file) {
+      req.body.image = `http://${req.get("host")}/media/${req.file.filename}`;
+    }
+    await req.whatever.update(req.body);
+    res.json(req.whatever);
   } catch (error) {
     next(error);
   }
