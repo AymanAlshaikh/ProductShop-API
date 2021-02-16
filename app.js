@@ -5,10 +5,12 @@ const path = require("path");
 const dirPath = path.join(__dirname, "media");
 const app = express();
 const routes = require("./routes/products");
+const shopRoutes = require("./routes/shops");
 
 app.use(express.json());
 app.use(cors());
 app.use("/data", routes);
+app.use("/shops", shopRoutes);
 app.use("/media", express.static(dirPath));
 
 app.use((req, res, next) => {

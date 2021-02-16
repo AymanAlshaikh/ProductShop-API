@@ -24,7 +24,7 @@ router.get("/", list);
 
 router.delete("/:dataId", removeProduct);
 
-router.post("/", upload.single("image"), newProduct);
+//router.post("/", upload.single("image"), newProduct);
 
 router.put("/:dataId", upload.single("image"), updateProduct);
 
