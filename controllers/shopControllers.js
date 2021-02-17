@@ -28,8 +28,6 @@ exports.list = async (req, res, next) => {
 };
 
 exports.removeShop = async (req, res, next) => {
-  const { shopId } = req.params;
-
   try {
     await req.whatever.destroy();
     res.status(204);
