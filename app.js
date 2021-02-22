@@ -1,7 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const passport = require("passport");
-const { localStrategy } = require("./middleWare/passport");
+const { localStrategy, jwtStrategy } = require("./middleWare/passport");
 const db = require("./db/models");
 const path = require("path");
 const dirPath = path.join(__dirname, "media");
@@ -14,6 +14,7 @@ app.use(express.json());
 app.use(cors());
 app.use(passport.initialize());
 passport.use(localStrategy);
+passport.use(jwtStrategy);
 app.use("/data", routes);
 app.use("/shops", shopRoutes);
 app.use(userRoutes);

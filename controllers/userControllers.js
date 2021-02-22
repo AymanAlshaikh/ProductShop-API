@@ -24,11 +24,12 @@ exports.signUp = async (req, res, next) => {
 exports.signIn = async (req, res, done) => {
   const { user } = req;
   const payload = {
+    id: user.id,
     username: user.username,
     email: user.email,
     firstname: user.firstName,
     lastName: user.lastName,
-    exp: Date.now() + 600000,
+    exp: Date.now() + 6000000,
   };
   const token = jwt.sign(JSON.stringify(payload), "secretkey");
   res.json({ token });

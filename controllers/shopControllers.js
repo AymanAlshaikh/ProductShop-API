@@ -41,6 +41,7 @@ exports.newShop = async (req, res, next) => {
   console.log(req.body);
   try {
     if (req.file) {
+      req.bode.userId = req.user.id;
       req.body.image = `http://${req.get("host")}/media/${req.file.filename}`;
     }
     const newShops = await Shop.create(req.body);
