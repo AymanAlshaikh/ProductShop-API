@@ -21,7 +21,7 @@ router.param("shopId", async (req, res, next, shopId) => {
   }
 });
 
-router.get("/", passport.authenticate("jwt", { session: false }), list);
+router.get("/", list);
 
 router.delete(
   "/:shopId",

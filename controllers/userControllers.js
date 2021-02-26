@@ -14,7 +14,7 @@ exports.signUp = async (req, res, next) => {
     req.body.password = hashPassword;
     console.log(req.body);
     const newUser = await User.create(req.body);
-    res.json(newUser);
+    res.json({token});
     res.status(201);
   } catch (error) {
     next(error);
@@ -26,9 +26,10 @@ exports.signIn = async (req, res, done) => {
   const payload = {
     id: user.id,
     username: user.username,
-    email: user.email,
-    firstname: user.firstName,
-    lastName: user.lastName,
+    password:user.password,
+    // email: user.email,
+    // firstname: user.firstName,
+    // lastName: user.lastName,
     exp: Date.now() + 6000000,
   };
   const token = jwt.sign(JSON.stringify(payload), "secretkey");

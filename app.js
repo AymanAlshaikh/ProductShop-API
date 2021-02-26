@@ -26,7 +26,7 @@ app.use((req, res, next) => {
 
 app.use((err, req, res, next) => {
   res.status(err.status || 500);
-  res.json({ error: { message: "internal server error" || error.message } });
+  res.json({ error: { message:  err.message } });
 });
 
 const run = async () => {

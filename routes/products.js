@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const upload = require("../middleware/multer");
+const passport = require("passport");
 
 const {
   list,
@@ -22,10 +23,10 @@ router.param("dataId", async (req, res, next, dataId) => {
 
 router.get("/", list);
 
-router.delete("/:dataId", removeProduct);
+router.delete("/:dataId",passport.authenticate("jwt", { session: false }), removeProduct);
 
 //router.post("/", upload.single("image"), newProduct);
 
-router.put("/:dataId", upload.single("image"), updateProduct);
+router.put("/:dataId",passport.authenticate("jwt", { session: false }), upload.single("image"), updateProduct);
 
 module.exports = router;
