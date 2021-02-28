@@ -76,6 +76,7 @@ exports.newProduct = async (req, res, next) => {
       error.status = 400;
       next(error);
     }
+
     // if (req.file) {
     //   req.body.image = `http://${req.get("host")}/media/${req.file.filename}`;
     // }
@@ -99,3 +100,4 @@ exports.updateShop = async (req, res, next) => {
     next(error);
   }
 };
+

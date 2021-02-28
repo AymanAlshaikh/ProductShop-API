@@ -9,6 +9,7 @@ const {
   newShop,
   fetchShop,
   newProduct,
+  removeProduct,
 } = require("../controllers/shopControllers");
 
 router.param("shopId", async (req, res, next, shopId) => {
@@ -48,5 +49,6 @@ router.put(
   upload.single("image"),
   updateShop
 );
+
 
 module.exports = router;

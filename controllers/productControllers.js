@@ -31,9 +31,15 @@ exports.removeProduct = async (req, res, next) => {
   const { dataId } = req.params;
 
   try {
-    await req.whatever.destroy();
-    res.status(204);
-    res.end();
+    if (req.user.id === req.whatever.userId) {
+      await req.whatever.destroy();
+      res.status(204);
+      res.end();
+    } else {
+      const error = new Error("UnAuthorized");
+      error.status = 400;
+      next(error);
+    }
   } catch (error) {
     next(error);
   }
@@ -55,11 +61,18 @@ exports.removeProduct = async (req, res, next) => {
 
 exports.updateProduct = async (req, res, next) => {
   try {
-    if (req.file) {
-      req.body.image = `http://${req.get("host")}/media/${req.file.filename}`;
+    if (req.user.id === req.whatever.userId) {
+      if (req.file) {
+        req.body.image = `http://${req.get("host")}/media/${req.file.filename}`;
+      }
+      await req.whatever.update(req.body);
+      res.json(req.whatever);
     }
-    await req.whatever.update(req.body);
-    res.json(req.whatever);
+    else {
+      const error = new Error("UnAuthorized");
+      error.status = 400;
+      next(error);
+    }
   } catch (error) {
     next(error);
   }
