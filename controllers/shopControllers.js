@@ -16,7 +16,7 @@ exports.list = async (req, res, next) => {
       include: [
         {
           model: Product,
-          attributes: ["id"],
+
           as: "products",
         },
       ],
@@ -100,4 +100,3 @@ exports.updateShop = async (req, res, next) => {
     next(error);
   }
 };
-

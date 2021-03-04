@@ -28,8 +28,6 @@ exports.list = async (req, res, next) => {
 };
 
 exports.removeProduct = async (req, res, next) => {
-  const { dataId } = req.params;
-
   try {
     if (req.user.id === req.whatever.userId) {
       await req.whatever.destroy();

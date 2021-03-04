@@ -9,7 +9,7 @@ const {
   newShop,
   fetchShop,
   newProduct,
-  removeProduct,
+ 
 } = require("../controllers/shopControllers");
 
 router.param("shopId", async (req, res, next, shopId) => {
@@ -50,5 +50,5 @@ router.put(
   updateShop
 );
 
-
+//router.delete("/data/:dataId", passport.authenticate("jwt", { session: false }), removeProduct);
 module.exports = router;
