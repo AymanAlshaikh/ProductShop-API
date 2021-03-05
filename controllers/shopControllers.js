@@ -16,7 +16,6 @@ exports.list = async (req, res, next) => {
       include: [
         {
           model: Product,
-
           as: "products",
         },
       ],

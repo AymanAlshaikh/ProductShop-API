@@ -9,6 +9,7 @@ const app = express();
 const routes = require("./routes/products");
 const shopRoutes = require("./routes/shops");
 const userRoutes = require("./routes/users");
+const orderRoutes = require("./routes/orders");
 
 app.use(express.json());
 app.use(cors());
@@ -17,6 +18,7 @@ passport.use(localStrategy);
 passport.use(jwtStrategy);
 app.use("/data", routes);
 app.use("/shops", shopRoutes);
+app.use(orderRoutes);
 app.use(userRoutes);
 app.use("/media", express.static(dirPath));
 
@@ -26,7 +28,7 @@ app.use((req, res, next) => {
 
 app.use((err, req, res, next) => {
   res.status(err.status || 500);
-  res.json({ error: { message:  err.message } });
+  res.json({ error: { message: err.message } });
 });
 
 const run = async () => {
