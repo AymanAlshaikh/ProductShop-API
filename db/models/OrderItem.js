@@ -3,7 +3,7 @@ const OrderItems = (sequelize, DataTypes) => {
     "OrderItem",
     {
       quantity: {
-        type: DataTypes.STRING,
+        type: DataTypes.INTEGER,
         defaultValue: 1,
       },
     },
