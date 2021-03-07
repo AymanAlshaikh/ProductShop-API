@@ -5,16 +5,20 @@ const jwt = require("jsonwebtoken");
 const { User } = require("../db/models");
 
 exports.signUp = async (req, res, next) => {
-  console.log(req.body);
   const { password } = req.body;
   try {
-    const hashPassword = await bcrypt.hash(password, 10);
-    console.log(hashPassword);
-    req.body.password = hashPassword;
-    console.log(req.body);
+    const hashedPassowrd = await bcrypt.hash(password, 10);
+    req.body.password = hashedPassowrd;
     const newUser = await User.create(req.body);
-    res.json({ token });
+
+    const payload = {
+      id: newUser.id,
+      username: newUser.username,
+      exp: Date.now() + 6000000,
+    };
+    const token = jwt.sign(JSON.stringify(payload), "secretkey");
     res.status(201);
+    res.json({ token });
   } catch (error) {
     next(error);
   }
